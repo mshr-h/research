@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Operator registry that maps ONNX ops to FX lowering handlers."""
 
 from __future__ import annotations

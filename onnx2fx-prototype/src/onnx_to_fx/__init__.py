@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Public API for the onnx_to_fx package."""
 
 from .converter import convert_onnx_to_fx

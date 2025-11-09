@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """End-to-end tests that convert full torchvision models."""
 
 from __future__ import annotations

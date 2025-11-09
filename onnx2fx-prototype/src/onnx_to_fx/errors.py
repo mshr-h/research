@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Custom exception types used by the onnx_to_fx package."""
 
 from __future__ import annotations

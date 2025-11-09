@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Internal utility helpers for ONNX to FX conversion."""
 
 from __future__ import annotations

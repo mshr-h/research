@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Core graph builder that lowers ONNX graphs to PyTorch FX graphs."""
 
 from __future__ import annotations

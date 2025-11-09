@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Unit tests that cover each supported ONNX operator in isolation."""
 
 from __future__ import annotations
