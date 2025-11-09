@@ -1,5 +1,4 @@
-"""User-facing conversion entry-points."""
-
+# SPDX-License-Identifier: Apache-2.0
 from __future__ import annotations
 
 from typing import Union
@@ -7,7 +6,6 @@ from typing import Union
 import onnx
 from torch import fx
 
-from .errors import ConversionError, UnsupportedOperatorError
 from .graph_builder import GraphBuilder
 
 
@@ -20,10 +18,10 @@ def convert_onnx_to_fx(
 
     Parameters
     ----------
-    model:
+    model : Union[onnx.ModelProto, str]
         Either an in-memory ``onnx.ModelProto`` or a filesystem path to an ONNX
         model file.
-    debug:
+    debug : bool, optional
         When ``True`` prints the resulting FX graph for inspection.
 
     Returns
@@ -31,22 +29,14 @@ def convert_onnx_to_fx(
     torch.fx.GraphModule
         A graph module that mirrors the ONNX graph and can be further edited or
         used for fine-tuning in PyTorch.
-
-    Raises
-    ------
-    UnsupportedOperatorError
-        If the model contains operators that are not yet implemented by the
-        converter.
-    ConversionError
-        If any other issue prevents the conversion from succeeding.
     """
 
-    try:
-        builder = GraphBuilder.from_model(model, debug=debug)
-        return builder.build()
-    except UnsupportedOperatorError:
-        raise
-    except ConversionError:
-        raise
-    except Exception as exc:  # pragma: no cover - unexpected failures
-        raise ConversionError("Unexpected failure while converting ONNX model") from exc
+    if isinstance(model, str):
+        model = onnx.load(model)
+    elif isinstance(model, onnx.ModelProto):
+        model = model
+    else:
+        raise TypeError("model must be a path or onnx.ModelProto")
+
+    builder = GraphBuilder.from_model(model, debug=debug)
+    return builder.build()

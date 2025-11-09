@@ -51,15 +51,8 @@ class GraphBuilder:
     # ---------------------------------------------------------------------
 
     @classmethod
-    def from_model(cls, model_or_path: onnx.ModelProto | str, *, debug: bool = False) -> "GraphBuilder":
+    def from_model(cls, model: onnx.ModelProto, *, debug: bool = False) -> "GraphBuilder":
         """Factory that loads a model if needed and performs shape inference."""
-
-        if isinstance(model_or_path, str):
-            model = onnx.load(model_or_path)
-        elif isinstance(model_or_path, onnx.ModelProto):
-            model = model_or_path
-        else:
-            raise TypeError("model_or_path must be a path or onnx.ModelProto")
 
         try:
             # Shape inference enriches ValueInfo so we can propagate metadata.
